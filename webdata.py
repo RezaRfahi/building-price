@@ -2,12 +2,19 @@ import requests
 import bs4
 import  re
 def build(lis):
-    count=1
-    attrs=list()
+    cunt=1
+    attrs=[]
+    varlist=[]
+    listcount=0
     for i in lis:
-        if count%3!=0:
-            attrs.append(i)
-        count=count+1
+        if cunt%3!=0:
+            varlist.append(i)
+            listcount=listcount+1
+            if listcount==2:
+                attrs.append(varlist)
+                listcount=0
+                varlist=[]
+        cunt=cunt+1
     return attrs
 req=requests.get('https://www.expat.com/en/housing/middle-east/iran/tehran/')
 r=lambda x:'Get Url' if x==200  else 'Get Url Failed!'
