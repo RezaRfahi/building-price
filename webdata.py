@@ -1,3 +1,4 @@
+from sklearn import tree
 import requests
 import bs4
 import  re
@@ -8,7 +9,7 @@ def build(lis):
     listcount=0
     for i in lis:
         if cunt%3!=0:
-            varlist.append(i)
+            varlist.append(int(i))
             listcount=listcount+1
             if listcount==2:
                 attrs.append(varlist)
@@ -63,6 +64,12 @@ duration=re.findall(r'\s+.*\s\d.\d+.per.(\w+)',str(find_price_text))
 price=sort_price_array(find_price)
 price=change_to_rial(price,find_unit)
 find_dur=re.findall(r'\s+.*\s\d.\d+.per.(\w+)',str(find_price_text))
-print(sort_price_array(find_price))
-print(find_unit)
-print(find_dur)
+price_org=sort_price_array(find_price)
+rialPrice=change_to_rial(price_org,find_unit)
+rooms_list=list()
+home_meter=list()
+for room,meter in values:
+    rooms_list.append(room)
+    home_meter.append(meter)
+for i in range(0,len(rooms_list)):
+    print('%i meter , %i room(s) , %i Rial per %s'%(home_meter[i],rooms_list[i],rialPrice[i],duration[i]))

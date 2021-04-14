@@ -1,2 +1,3 @@
-from sklearn import tree
+import webdata
+
 d=tree.DecisionTreeClassifier()
