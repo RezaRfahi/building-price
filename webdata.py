@@ -74,7 +74,7 @@ for room,meter in values:
     rooms_list.append(room)
     home_meter.append(meter)
 for i in range(0,len(rooms_list)):
-    print('%i meter , %i room(s) , %i Rial per %s'%(home_meter[i],rooms_list[i],rialPrice[i],duration[i]))
+    print('%i meter , %i room(s) , %i Rial per %s'%(home_meter[i],rooms_list[i],price[i],duration[i]))
 ####################################################
 ml=tree.DecisionTreeClassifier()
 ml.fit(values,price)
