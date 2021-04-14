@@ -1,10 +1,6 @@
 import requests
 import bs4
 import  re
-<<<<<<< HEAD
-####################################################
-=======
->>>>>>> b36de6c9cd3cf7a8253b66965bc520eaa5e1fb52
 def build(lis):
     cunt=1
     attrs=[]
@@ -43,7 +39,6 @@ def change_to_rial(list_price,list_unit):
     find_eur_price=find_eur_text_bs.find_all('td',attrs={'class':'nf'})
     eur_price=re.findall(r'.+.>(\d+.+\d+.)<.+.',str(find_eur_price))
     eur_price=int(eur_price[0].replace(',',''))
-<<<<<<< HEAD
 ####
     rial_price=list()
     for i in range(0,len(list_price)):
@@ -52,9 +47,7 @@ def change_to_rial(list_price,list_unit):
         elif list_unit[i]=='€':
             rial_price.append(list_price[i]*eur_price)
     return rial_price
-                
-=======
->>>>>>> b36de6c9cd3cf7a8253b66965bc520eaa5e1fb52
+
 ####################################################
 req=requests.get('https://www.expat.com/en/housing/middle-east/iran/tehran/')
 r=lambda x:'Get Url' if x==200  else 'Get Url Failed!'
@@ -66,13 +59,10 @@ values=build(find_attrs)
 find_price_text=sort.find_all('span', attrs={'class':'classified-wrapper__price'})
 find_price=re.findall(r'\s+.*\s(\d.\d+).per.\w+',str(find_price_text))
 find_unit=re.findall(r'\s+(.*)\s\d+.+\d.per.\w+',str(find_price_text))
-<<<<<<< HEAD
 duration=re.findall(r'\s+.*\s\d.\d+.per.(\w+)',str(find_price_text))
 price=sort_price_array(find_price)
 price=change_to_rial(price,find_unit)
-=======
 find_dur=re.findall(r'\s+.*\s\d.\d+.per.(\w+)',str(find_price_text))
 print(sort_price_array(find_price))
 print(find_unit)
 print(find_dur)
->>>>>>> b36de6c9cd3cf7a8253b66965bc520eaa5e1fb52
