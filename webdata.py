@@ -18,10 +18,14 @@ def build(lis):
         cunt=cunt+1
     return attrs
 ####################################################
-def sort_price_array(list_price):
+def sort_price_array(list_price,length):
     price=list()
+    count=0
     for i in list_price:
         price.append(int(i.replace(',', '')))
+        count=count+1
+        if count==length:
+            break
     return price
 ####################################################
 def change_to_rial(list_price,list_unit):
@@ -58,18 +62,19 @@ find=sort.find_all('span', attrs={'class':'classified-wrapper__category'})
 find_attrs=re.findall(r'[0-9]+',str(find))
 values=build(find_attrs)
 find_price_text=sort.find_all('span', attrs={'class':'classified-wrapper__price'})
-find_price=re.findall(r'\s+.*\s(\d.\d+).per.\w+',str(find_price_text))
+find_price=re.findall(r'\s+(\d.*..+.\d).+',str(find_price_text))
 find_unit=re.findall(r'\s+(.*)\s\d+.+\d.per.\w+',str(find_price_text))
 duration=re.findall(r'\s+.*\s\d.\d+.per.(\w+)',str(find_price_text))
-price=sort_price_array(find_price)
+price=sort_price_array(find_price,len(values))
 price=change_to_rial(price,find_unit)
 find_dur=re.findall(r'\s+.*\s\d.\d+.per.(\w+)',str(find_price_text))
-price_org=sort_price_array(find_price)
-rialPrice=change_to_rial(price_org,find_unit)
 rooms_list=list()
 home_meter=list()
 for room,meter in values:
     rooms_list.append(room)
     home_meter.append(meter)
-for i in range(0,len(rooms_list)):
-    print('%i meter , %i room(s) , %i Rial per %s'%(home_meter[i],rooms_list[i],rialPrice[i],duration[i]))
+#for i in range(0,len(rooms_list)):
+ #   print('%i meter , %i room(s) , %i Rial per %s'%(home_meter[i],rooms_list[i],rialPrice[i],duration[i]))
+####################################################
+ml=tree.DecisionTreeClassifier()
+ml.fit(values,price)
