@@ -54,6 +54,10 @@ def change_to_rial(list_price,list_unit):
     return rial_price
 
 ####################################################
+def answer(Ml,Solve_liet):
+    find_answer=Ml.predict([Solve_liet])
+    return find_answer
+###################################################
 req=requests.get('https://www.expat.com/en/housing/middle-east/iran/tehran/')
 r=lambda x:'Get Url' if x==200  else 'Get Url Failed!'
 print(r(req.status_code))
@@ -76,5 +80,18 @@ for room,meter in values:
 for i in range(0,len(rooms_list)):
     print('%i meter , %i room(s) , %i Rial per %s'%(home_meter[i],rooms_list[i],price[i],duration[i]))
 ####################################################
+flag=True
 ml=tree.DecisionTreeClassifier()
 ml.fit(values,price)
+while flag:
+    solve_list=[]
+    insert_rooms=int(input('Insert your home rooms for find : '))
+    solve_list.append(insert_rooms)
+    insert_meter=int(input('Insert your home meters for find : '))
+    solve_list.append(insert_meter)
+    print(answer(ml,solve_list))
+    continue_question=(input('Do you want countinue y/n : '))
+    if continue_question.upper()=='Y':
+        flag=True
+    elif continue_question.upper()=='N':
+        flag=False
