@@ -42,7 +42,7 @@ def change_to_rial(list_price,list_unit):
     find_eur_text=sort_eur.find_all('tr',attrs={'data-market-row':'price_eur'})
     find_eur_text_bs=bs4.BeautifulSoup(str(find_eur_text),'html.parser')
     find_eur_price=find_eur_text_bs.find_all('td',attrs={'class':'nf'})
-    eur_price=re.findall(r'.+.>(\d+.+\d+.)<.+.',str(find_eur_price))
+    eur_price=re.findall(r'(\d+,\d+)',str(find_eur_price))
     eur_price=int(eur_price[0].replace(',',''))
 ####
     rial_price=list()
