@@ -90,8 +90,14 @@ while flag:
     insert_meter=int(input('Insert your home meters for find : '))
     solve_list.append(insert_meter)
     print(answer(ml,solve_list))
-    continue_question=(input('Do you want countinue y/n : '))
-    if continue_question.upper()=='Y':
-        flag=True
-    elif continue_question.upper()=='N':
-        flag=False
+    continue_question=True
+    while continue_question:
+        continue_question=(input('Do you want countinue y/n : '))
+        if continue_question.upper()=='Y':
+            flag=True
+            continue_question=False
+        elif continue_question.upper()=='N':
+            flag=False
+            continue_question=False
+        else:
+            print('Invalid input..!')
